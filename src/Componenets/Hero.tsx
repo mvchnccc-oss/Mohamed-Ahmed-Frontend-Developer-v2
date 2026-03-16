@@ -51,7 +51,7 @@ export default function Hero() {
               </button>
             </a>
 
-            <a href="/Mohamed_Ahmed_CV_Updated (2).pdf" download>
+            <a href="/Mohamed_Ahmed_CV.pdf" download>
               <button
                 style={{
                   background: "transparent", color: "var(--ink)", padding: "0.75rem 2rem",
