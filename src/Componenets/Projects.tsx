@@ -12,6 +12,13 @@ interface Project {
 
 const PROJECTS: Project[] = [
   {
+    title: "ShopSphere",
+    desc: "Full-stack e-commerce platform with multi-role support (buyer, seller, admin). Architected all API integrations, auth flows with NextAuth + JWT, server actions, paginated search, and dynamic routing — end to end.",
+    img: ShopSphere, // 👈 محتاج تضيف الصورة دي
+    tags: ["Next.js", "NextAuth", "JWT", "TypeScript", "Spring Boot"],
+    href: "https://shopsphere-e-commerce-web-applicati-mu.vercel.app/",
+  },
+  {
     title: "Modern E-commerce",
     desc: "Built with Next.js, Stripe integration, and complex cart state management.",
     img: Ecommerce,
@@ -25,13 +32,7 @@ const PROJECTS: Project[] = [
     tags: ["React", "HTML/CSS", "Tailwind"],
     href: "https://company-portfolio-first-progect.vercel.app/",
   },
-  {
-  title: "ShopSphere",
-  desc: "Full-stack e-commerce platform with multi-role support (buyer, seller, admin). Architected all API integrations, auth flows with NextAuth + JWT, server actions, paginated search, and dynamic routing — end to end.",
-  img: ShopSphere, // 👈 محتاج تضيف الصورة دي
-  tags: ["Next.js", "NextAuth", "JWT", "TypeScript", "Spring Boot"],
-  href: "https://shopsphere-e-commerce-web-applicati-mu.vercel.app/",
-},
+
 ];
 
 function ProjectCard({ project }: { project: Project }) {
