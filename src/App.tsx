@@ -1,34 +1,30 @@
-import { useState, useEffect } from "react";
-import "./styles/global.css";
-
-import Navbar   from "./Componenets/Navbar";
-import Hero     from "./Componenets/Hero";
-import About    from "./Componenets/About";
-import Skills   from "./Componenets/Skills";
-import Projects from "./Componenets/Projects";
-import Contact  from "./Componenets/Contact";
-import Footer   from "./Componenets/Footer";
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Projects from "./components/Projects";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 export default function App() {
-  const [dark, setDark] = useState<boolean>(() => {
-    const saved = localStorage.getItem("color-theme");
-    if (saved) return saved === "dark";
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
-  });
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", dark);
-    localStorage.setItem("color-theme", dark ? "dark" : "light");
-  }, [dark]);
+  const [dark] = useState(true); // always dark — theme is fixed to dark
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--ink)" }}>
-      <Navbar dark={dark} toggleTheme={() => setDark(d => !d)} />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
+    <div style={{
+      minHeight: "100vh",
+      background: "#020209",
+      color: "#e2e8f0",
+      overflowX: "hidden",
+    }}>
+      <Navbar dark={dark} />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+      </main>
       <Footer />
     </div>
   );

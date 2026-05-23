@@ -1,73 +1,40 @@
-# React + TypeScript + Vite
+# 🚀 Mohamed Ahmed — Portfolio (Upgraded)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ultra-modern dark portfolio with 3D effects, particle canvas, tilt cards, glassmorphism navbar, and animated skill grid.
 
-Currently, two official plugins are available:
+## Tech Stack
+- **React 18** + **TypeScript**
+- **Vite** (fast dev server & bundler)
+- **CSS-in-JS** inline styles (zero external CSS deps, copy-paste ready)
+- Google Fonts: **Syne**, **Space Grotesk**, **JetBrains Mono**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Setup
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Components
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| File | Description |
+|------|-------------|
+| `Navbar.tsx` | Floating glassmorphism dock — highlights active section via IntersectionObserver |
+| `Hero.tsx` | Particle canvas bg · typewriter text · orbit icon animation · social links |
+| `About.tsx` | Bento grid layout · 3D tilt cards · timeline for education & experience |
+| `Skills.tsx` | Filterable grid · animated progress bars · 3D tilt hover effect per card |
+| `Projects.tsx` | Featured perspective-tilt card · regular 3D hover cards · glow borders |
+| `Contact.tsx` | Glassmorphism form · shadcn/ui-style inputs · contact info cards |
+| `Footer.tsx` | Clean dark footer · brand · nav links · socials |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Images (place in `/public/`)
+
+- `/public/Mohamed ahmed.png` — Your profile photo for the Hero
+- `/public/ShopSphere Home.png` — ShopSphere project screenshot
+- `/public/LandingPage.png` — SaaS Landing Page screenshot
+
+## Notes
+
+- The contact form simulates a 1.8s send delay. Wire it to **Formspree**, **EmailJS**, or a Next.js API route for real sends.
+- All components are **zero-dependency** (no Framer Motion, Three.js, or external UI libs required) — effects are done with pure CSS animations and vanilla JS mouse events.
+- To migrate to **Next.js App Router**: add `"use client"` at the top of each file (already present), move files to `app/components/`, and replace `index.tsx` with `app/page.tsx`.
