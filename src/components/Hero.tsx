@@ -115,24 +115,42 @@ export default function Hero() {
           height: 48px;
           margin: -24px;
         }
+@media (max-width: 968px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 3rem;
+  }
 
-        @media (max-width: 968px) {
-          .hero-container {
-            grid-template-columns: 1fr;
-            text-align: center;
-            gap: 4rem;
-          }
-          .right-side-universe {
-            order: -1;
-          }
-          .universe-stage {
-            width: 320px;
-            height: 320px;
-          }
-          .orbit-inner { width: 180px; height: 180px; }
-          .orbit-mid { width: 250px; height: 250px; }
-          .orbit-outer { width: 320px; height: 320px; }
-        }
+  .right-side-universe {
+    order: -1;
+  }
+
+  .universe-stage {
+    width: 280px;
+    height: 280px;
+  }
+
+  .orbit-inner { width: 160px; height: 160px; }
+  .orbit-mid { width: 220px; height: 220px; }
+  .orbit-outer { width: 280px; height: 280px; }
+
+ .hero-container h1 {
+    font-size: 2rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .hero-container p {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    padding: 0 0.5rem;
+  }
+
+  .hero-container a {
+    font-size: 0.82rem !important;
+    padding: 0.75rem 1.4rem !important;
+  }
+}
       `}</style>
 
       {/* توهج خلفي ديناميكي */}
@@ -177,7 +195,7 @@ export default function Hero() {
             lineHeight: 1.7, maxWidth: "560px", marginBottom: "2.5rem",
             fontFamily: "'Space Grotesk', sans-serif"
           }}>
-            د            I am <span style={{ color: "#f1f5f9", fontWeight: 600 }}>Mohamed Ahmed Shehata</span>.
+            I am <span style={{ color: "#f1f5f9", fontWeight: 600 }}>Mohamed Ahmed Shehata</span>.
             A Software Engineer specialized in creating fast responsive frontends with <span style={{ color: "#818cf8" }}>Next.js & React</span>,
             backed by robust enterprise backend services using <span style={{ color: "#38bdf8" }}>Java Spring Boot</span>.
           </p>
