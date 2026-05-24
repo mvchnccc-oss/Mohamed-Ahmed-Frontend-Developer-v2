@@ -76,7 +76,8 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function TimelineEntry({
   icon: IconComponent, title, subtitle, period, description, color, delay,
 }: {
-  icon: React.ComponentType<{ size?: number; color?: string }>; 
+  // التصليح السحري هنا: تحويل نوع الـ Icon لـ React.ComponentType<any> لمنع تعارض الـ type الخاص بـ size
+  icon: React.ComponentType<any>; 
   title: string; subtitle: string;
   period: string; description: string; color: string; delay: number;
 }) {
@@ -94,7 +95,7 @@ function TimelineEntry({
       ref={ref}
       style={{
         display: "flex", gap: "1.25rem", marginBottom: "2rem",
-        opacity: visible ? 1 : 0,
+        opacity: visible ? "1" : "0",
         transform: visible ? "translateX(0)" : "translateX(-20px)",
         transition: `all 0.6s ease ${delay}ms`,
       }}
@@ -131,7 +132,7 @@ function TimelineEntry({
             {period}
           </span>
         </div>
-        <p style={{ color: "#64748b", fontSize: "0.875rem", lineHeight: 1.7, fontFamily: "'Space Grotesk', sans-serif" }}>
+        <p style={{ color: "#94a3b8", fontSize: "0.875rem", lineHeight: 1.7, fontFamily: "'Space Grotesk', sans-serif" }}>
           {description}
         </p>
       </div>
@@ -151,11 +152,13 @@ export default function About() {
   }, []);
 
   const bentoCardStyle: React.CSSProperties = {
-    background: "rgba(10, 10, 25, 0.6)",
-    border: "1px solid rgba(255,255,255,0.07)",
-    borderRadius: 16,
-    padding: "1.5rem",
-    backdropFilter: "blur(8px)",
+    background: "rgba(6, 6, 16, 0.6)",
+    border: "1px solid rgba(255,255,255,0.05)",
+    borderRadius: 20,
+    padding: "1.75rem",
+    backdropFilter: "blur(12px)",
+    WebkitBackdropFilter: "blur(12px)",
+    boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
   };
 
   return (
@@ -165,7 +168,7 @@ export default function About() {
           display: grid;
           grid-template-columns: repeat(12, 1fr);
           grid-template-rows: auto;
-          gap: 1rem;
+          gap: 1.25rem;
         }
         .bento-col1 { grid-column: span 7; }
         .bento-col2 { grid-column: span 5; }
@@ -177,9 +180,15 @@ export default function About() {
         .info-pill {
           display: inline-flex; align-items: center; gap: 0.5rem;
           padding: 0.4rem 0.9rem; border-radius: 999px;
-          background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-          font-size: 0.82rem; color: #94a3b8;
+          background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+          font-size: 0.82rem; color: #cbd5e1;
           font-family: 'Space Grotesk', sans-serif;
+          transition: all 0.2s ease;
+        }
+        .info-pill:hover {
+          background: rgba(255,255,255,0.06);
+          border-color: rgba(99,102,241,0.3);
+          color: #f1f5f9;
         }
         .glow-number {
           font-size: 3rem; font-weight: 900; line-height: 1;
@@ -195,7 +204,7 @@ export default function About() {
           ref={ref}
           style={{
             textAlign: "center", marginBottom: "4rem",
-            opacity: visible ? 1 : 0,
+            opacity: visible ? "1" : "0",
             transform: visible ? "translateY(0)" : "translateY(20px)",
             transition: "all 0.6s ease",
           }}
@@ -207,11 +216,11 @@ export default function About() {
             color: "#f1f5f9", marginBottom: "1rem",
           }}>
             Crafting digital experiences<br />
-            <span style={{ background: "linear-gradient(135deg,#818cf8,#38bdf8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <span style={{ background: "linear-gradient(135deg,#818cf8,#38bdf8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               with purpose & precision
             </span>
           </h2>
-          <p style={{ color: "#475569", maxWidth: 560, margin: "0 auto", fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1.7 }}>
+          <p style={{ color: "#94a3b8", maxWidth: 560, margin: "0 auto", fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1.7 }}>
             Frontend Developer from Cairo, Egypt — passionate about building products that live at the intersection of beautiful design and robust engineering.
           </p>
         </div>
@@ -223,52 +232,52 @@ export default function About() {
             <div style={{ marginBottom: "1rem" }}>
               <SectionLabel>Who I am</SectionLabel>
             </div>
-            <p style={{ color: "#94a3b8", lineHeight: 1.8, marginBottom: "1rem", fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.95rem" }}>
+            <p style={{ color: "#cbd5e1", lineHeight: 1.8, marginBottom: "1rem", fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.95rem" }}>
               I'm a <strong style={{ color: "#c7d2fe" }}>Frontend Engineer</strong> with a deep love for crafting seamless, performant web interfaces. I specialize in turning complex problems into elegant, intuitive user experiences using the modern JavaScript ecosystem.
             </p>
-            <p style={{ color: "#64748b", lineHeight: 1.8, fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.9rem" }}>
+            <p style={{ color: "#94a3b8", lineHeight: 1.8, fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.9rem" }}>
               Whether it's architecting a full-stack e-commerce platform with <strong style={{ color: "#818cf8" }}>Next.js & Spring Boot</strong>, or pixel-perfecting a high-conversion landing page — I bring the same obsessive attention to detail to every project.
             </p>
             
             {/* Info Pills with Lucide Icons */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "1.5rem" }}>
               <span className="info-pill">
-                <MapPin size={14} className="text-indigo-400" /> Cairo, Egypt
+                <MapPin size={14} style={{ color: "#818cf8" }} /> Cairo, Egypt
               </span>
               <span className="info-pill">
-                <GraduationCap size={14} className="text-indigo-400" /> Cairo University '28
+                <GraduationCap size={14} style={{ color: "#818cf8" }} /> Cairo University '28
               </span>
               <span className="info-pill">
-                <Briefcase size={14} className="text-indigo-400" /> Frontend Trainee
+                <Briefcase size={14} style={{ color: "#818cf8" }} /> Frontend Trainee
               </span>
               <span className="info-pill">
-                <Sparkles size={14} className="text-indigo-400" /> Open to Offers
+                <Sparkles size={14} style={{ color: "#818cf8" }} /> Open to Offers
               </span>
             </div>
           </TiltCard>
 
           {/* Stats mini cards */}
           <div className="bento-col2" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <TiltCard style={{ ...bentoCardStyle, textAlign: "center", flex: 1 }}>
+            <TiltCard style={{ ...bentoCardStyle, textAlign: "center", flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
               <div className="glow-number">8+</div>
-              <div style={{ color: "#475569", fontSize: "0.8rem", fontWeight: 600, marginTop: "0.4rem", fontFamily: "'Space Grotesk', sans-serif", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+              <div style={{ color: "#94a3b8", fontSize: "0.8rem", fontWeight: 600, marginTop: "0.4rem", fontFamily: "'Space Grotesk', sans-serif", textTransform: "uppercase", letterSpacing: "0.08em" }}>
                 Technologies Mastered
               </div>
             </TiltCard>
-            <TiltCard style={{ ...bentoCardStyle, textAlign: "center", flex: 1 }}>
+            <TiltCard style={{ ...bentoCardStyle, textAlign: "center", flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
               <div className="glow-number">2+</div>
-              <div style={{ color: "#475569", fontSize: "0.8rem", fontWeight: 600, marginTop: "0.4rem", fontFamily: "'Space Grotesk', sans-serif", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+              <div style={{ color: "#94a3b8", fontSize: "0.8rem", fontWeight: 600, marginTop: "0.4rem", fontFamily: "'Space Grotesk', sans-serif", textTransform: "uppercase", letterSpacing: "0.08em" }}>
                 Production Projects
               </div>
             </TiltCard>
-            <TiltCard style={{ ...bentoCardStyle, flex: 1 }}>
+            <TiltCard style={{ ...bentoCardStyle, flex: 1, display: "flex", alignItems: "center" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                 <span style={{ color: "#818cf8", display: "flex", alignItems: "center" }}>
                   <Terminal size={24} />
                 </span>
                 <div>
                   <div style={{ color: "#c7d2fe", fontWeight: 700, fontSize: "0.9rem", fontFamily: "'Space Grotesk', sans-serif" }}>LeetCode Solver</div>
-                  <div style={{ color: "#475569", fontSize: "0.78rem", fontFamily: "'Space Grotesk', sans-serif" }}>Algorithms & DSA practice</div>
+                  <div style={{ color: "#94a3b8", fontSize: "0.78rem", fontFamily: "'Space Grotesk', sans-serif" }}>Algorithms & DSA practice</div>
                 </div>
               </div>
             </TiltCard>

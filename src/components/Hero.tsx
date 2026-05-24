@@ -21,7 +21,7 @@ export default function Hero() {
       overflow: "hidden",
       position: "relative"
     }}>
-      
+
       <style>{`
         /* أنيميشن الدوران للمدارات المختلفة */
         @keyframes orbit-clockwise {
@@ -142,12 +142,13 @@ export default function Hero() {
         pointerEvents: "none"
       }} />
 
+      // ابحث عن الحاوية دي وعدلها بالشكل ده:
       <div className="hero-container" style={{
-        opacity: mounted ? 1 : 0,
+        opacity: mounted ? "1" : "0", // تحويلها إلى string
         transform: mounted ? "translateY(0)" : "translateY(30px)",
         transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
       }}>
-        
+
         {/* نصوص الـ Hero */}
         <div>
           <div style={{
@@ -175,8 +176,8 @@ export default function Hero() {
             lineHeight: 1.7, maxWidth: "560px", marginBottom: "2.5rem",
             fontFamily: "'Space Grotesk', sans-serif"
           }}>
-            I am <span style={{ color: "#f1f5f9", fontWeight: 600 }}>Mohamed Ahmed Shehata</span>. 
-            A Software Engineer specialized in creating fast responsive frontends with <span style={{ color: "#818cf8" }}>Next.js & React</span>, 
+            I am <span style={{ color: "#f1f5f9", fontWeight: 600 }}>Mohamed Ahmed Shehata</span>.
+            A Software Engineer specialized in creating fast responsive frontends with <span style={{ color: "#818cf8" }}>Next.js & React</span>,
             backed by robust enterprise backend services using <span style={{ color: "#38bdf8" }}>Java Spring Boot</span>.
           </p>
 
@@ -188,8 +189,8 @@ export default function Hero() {
               fontFamily: "'Space Grotesk', sans-serif", boxShadow: "0 4px 20px rgba(99, 102, 241, 0.25)",
               transition: "transform 0.2s"
             }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-2px)"}
-            onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
+              onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-2px)"}
+              onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
             >
               View My Work
             </a>
@@ -200,14 +201,14 @@ export default function Hero() {
               fontWeight: 600, fontSize: "0.9rem", textDecoration: "none",
               fontFamily: "'Space Grotesk', sans-serif", transition: "all 0.2s"
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-              e.currentTarget.style.color = "#f1f5f9";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.02)";
-              e.currentTarget.style.color = "#94a3b8";
-            }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                e.currentTarget.style.color = "#f1f5f9";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                e.currentTarget.style.color = "#94a3b8";
+              }}
             >
               Contact Me
             </a>
@@ -217,7 +218,7 @@ export default function Hero() {
         {/* الجانب الأيمن: الكون المداري مع إضافة النيون شادوز وإجبار الأبعاد الهندسية المربعة */}
         <div className="right-side-universe" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <div className="universe-stage">
-            
+
             {/* 1. المدار الداخلي (يحمل أيقونة React) */}
             <div className="orbit-inner">
               <div className="satellite-node" style={{ transform: `translate(120px)` }}>
@@ -252,7 +253,7 @@ export default function Hero() {
                   <Terminal size={20} />
                 </div>
               </div>
-              
+
               {/* أيقونة ثانية في نفس المدار الأوسط (TypeScript) */}
               <div className="satellite-node" style={{ transform: `translate(170px)` }}>
                 <div style={{
@@ -300,7 +301,7 @@ export default function Hero() {
                 width: "100%", height: "100%", borderRadius: "50%",
                 overflow: "hidden", background: "#060612", position: "relative"
               }}>
-                <img 
+                <img
                   src={MohamedAhmed}
                   alt="Mohamed Ahmed"
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
