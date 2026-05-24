@@ -29,7 +29,7 @@ const PROJECTS: Project[] = [
     img: ShopSphere,
     tags: ["Next.js", "TypeScript", "Spring Boot", "Stripe", "NextAuth", "JWT"],
     github: "https://github.com/mvchnccc-oss/shopsphere-E-commerce-web-Application",
-    live: "https://e-commerce-gamma-wine-32.vercel.app/",
+    live: "https://shopsphere-e-commerce-web-applicati-mu.vercel.app/",
     accent: "16,185,129",
     featured: true,
     roles: ["Customer Portal", "Seller Dashboard", "Admin Panel"],
