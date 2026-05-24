@@ -265,7 +265,7 @@ export default function About() {
               </div>
             </TiltCard>
             <TiltCard style={{ ...bentoCardStyle, textAlign: "center", flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-              <div className="glow-number">2+</div>
+              <div className="glow-number">3+</div>
               <div style={{ color: "#94a3b8", fontSize: "0.8rem", fontWeight: 600, marginTop: "0.4rem", fontFamily: "'Space Grotesk', sans-serif", textTransform: "uppercase", letterSpacing: "0.08em" }}>
                 Production Projects
               </div>
