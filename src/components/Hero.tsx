@@ -1,4 +1,8 @@
-import MohamedAhmed from "../assets/Mohamed ahmed.png"
+"use client";
+import MohamedAhmed from "../assets/Mohamed ahmed.png";
+// استيراد أيقونة التحميل الحديثة من مكتبة Lucide
+import { ArrowDownToLine } from "lucide-react";
+
 export default function Hero() {
   return (
     <section id="home" style={{
@@ -62,10 +66,7 @@ export default function Hero() {
                 onMouseEnter={e => ((e.currentTarget as HTMLElement).style.borderColor = "#2563eb")}
                 onMouseLeave={e => ((e.currentTarget as HTMLElement).style.borderColor = "var(--border)")}>
                 Download CV
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                    strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <ArrowDownToLine size={16} strokeWidth={2} />
               </button>
             </a>
           </div>
@@ -83,7 +84,7 @@ export default function Hero() {
               background: "#2563eb", borderRadius: "50%", filter: "blur(60px)",
             }} />
             <img
-              src={MohamedAhmed}
+              src={MohamedAhmed.src || MohamedAhmed}
               alt="Mohamed Ahmed"
               style={{
                 position: "relative", width: "100%", height: "100%",

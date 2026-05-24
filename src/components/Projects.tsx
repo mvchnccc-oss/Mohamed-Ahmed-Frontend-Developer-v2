@@ -1,8 +1,11 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
+// استيراد الأيقونات المتاحة فقط والمضمونة من لوكيد
+import { ExternalLink } from "lucide-react";
 import ShopSphere from "../assets/ShopSphereHome.png";
 import LandingPage from "../assets/LandingPage.png";
 import ShopMart from "../assets/E-commerce.png";
+
 /* ─── Types ──────────────────────────────────────────────── */
 interface Project {
   title: string;
@@ -16,6 +19,7 @@ interface Project {
   featured?: boolean;
   roles?: string[];
 }
+
 /* ─── Data ───────────────────────────────────────────────── */
 const PROJECTS: Project[] = [
   {
@@ -24,9 +28,9 @@ const PROJECTS: Project[] = [
     desc: "Multi-role e-commerce system built with Next.js & Java Spring Boot. Features three distinct portals for Customers, Sellers, and Admins — with Stripe payment integration, NextAuth + JWT authentication, server actions, paginated search, and dynamic routing architected end-to-end.",
     img: ShopSphere,
     tags: ["Next.js", "TypeScript", "Spring Boot", "Stripe", "NextAuth", "JWT"],
-    github: "https://github.com/mvchnccc-oss/shopsphere-E-commerce-weدb-Application",
+    github: "https://github.com/mvchnccc-oss/shopsphere-E-commerce-web-Application",
     live: "https://e-commerce-gamma-wine-32.vercel.app/",
-    accent: "16,185,129", // تم التغيير إلى الأخضر الزمردي (Emerald) ليتناسق مع خلفية الموقع الخضراء
+    accent: "16,185,129",
     featured: true,
     roles: ["Customer Portal", "Seller Dashboard", "Admin Panel"],
   },
@@ -37,27 +41,38 @@ const PROJECTS: Project[] = [
     img: LandingPage,
     tags: ["React", "Tailwind CSS", "HTML5", "Performance"],
     live: "https://company-portfolio-first-progect.vercel.app/",
-    accent: "249,115,22", // تم التغيير إلى البرتقالي الدافئ (Amber/Orange) ليطابق ثيم موقع Horuvision
+    accent: "249,115,22",
     featured: false,
   },
   {
     title: "ShopMart",
     tagline: "Next-Gen E-Commerce Ecosystem",
     desc: "A comprehensive web application designed for seamless online shopping. Features dynamic product catalogs, optimized cart management, and secure checkout workflows, fully deployed and optimized for fast loading and modern user experience.",
-    img: ShopMart, 
+    img: ShopMart,
     tags: ["React", "Next.js", "TypeScript", "Tailwind CSS", "E-Commerce"],
     github: "https://github.com/mvchnccc-oss/ShopMart-E-commerce-web-application",
     live: "https://e-commerce-gamma-wine-32.vercel.app/",
-    accent: "34,197,94", // تم التغيير إلى الأخضر الحيوي (Green) ليتناسق مع الهوية البصرية وشعار التطبيق
+    accent: "34,197,94",
     featured: false,
   },
 ];
+
+/* ─── مكون أيقونة جيتهاب المدمج لمنع الأخطاء ────────────────── */
+function GithubIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} fill="currentColor" viewBox="0 0 24 24" style={{ display: "inline-block", verticalAlign: "middle" }}>
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+    </svg>
+  );
+}
 
 /* ─── Tilt Card Wrapper ──────────────────────────────────── */
 function TiltWrapper({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   const ref = useRef<HTMLDivElement>(null);
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (window.innerWidth <= 768) return;
+
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -104,16 +119,23 @@ function FeaturedCard({ project, visible }: { project: Project; visible: boolean
         backdropFilter: "blur(12px)",
         boxShadow: `0 0 40px rgba(${project.accent}, 0.08), 0 20px 60px rgba(0,0,0,0.4)`,
       }}>
-        {/* Glow border top */}
         <div style={{
           position: "absolute", top: 0, left: 0, right: 0, height: 2,
           background: `linear-gradient(90deg, transparent, rgba(${project.accent},0.8), transparent)`,
         }} />
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: 360 }}>
+        <div className="featured-card-inner" style={{ minHeight: 360 }}>
           {/* Image side */}
           <div
-            style={{ position: "relative", overflow: "hidden", cursor: "pointer" }}
+            className="featured-image-wrapper"
+            style={{
+              position: "relative",
+              overflow: "hidden",
+              cursor: "pointer",
+              width: "100%",
+              height: "100%",
+              minHeight: "360px"
+            }}
             onMouseEnter={() => setImgHovered(true)}
             onMouseLeave={() => setImgHovered(false)}
           >
@@ -121,12 +143,14 @@ function FeaturedCard({ project, visible }: { project: Project; visible: boolean
               src={project.img}
               alt={project.title}
               style={{
-                width: "100%", height: "100%", objectFit: "cover",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center",
                 transform: imgHovered ? "scale(1.06)" : "scale(1)",
                 transition: "transform 0.5s ease",
               }}
             />
-            {/* Overlay */}
             <div style={{
               position: "absolute", inset: 0,
               background: `linear-gradient(135deg, rgba(${project.accent},0.15) 0%, transparent 60%, rgba(0,0,0,0.4) 100%)`,
@@ -134,7 +158,6 @@ function FeaturedCard({ project, visible }: { project: Project; visible: boolean
               opacity: imgHovered ? 1 : 0.6,
             }} />
 
-            {/* Featured badge */}
             <div style={{
               position: "absolute", top: 16, left: 16,
               padding: "0.25rem 0.75rem", borderRadius: 999,
@@ -144,6 +167,7 @@ function FeaturedCard({ project, visible }: { project: Project; visible: boolean
               fontSize: "0.7rem", fontWeight: 700,
               fontFamily: "'JetBrains Mono', monospace",
               letterSpacing: "0.08em", textTransform: "uppercase",
+              zIndex: 10,
             }}>
               ⭐ Featured
             </div>
@@ -173,7 +197,6 @@ function FeaturedCard({ project, visible }: { project: Project; visible: boolean
                 {project.desc}
               </p>
 
-              {/* Roles */}
               {project.roles && (
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.25rem" }}>
                   {project.roles.map((r) => (
@@ -223,9 +246,7 @@ function FeaturedCard({ project, visible }: { project: Project; visible: boolean
                   transition: "all 0.2s",
                 }}
               >
-                <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <ExternalLink size={14} strokeWidth={2.5} />
                 Live Demo
               </a>
               {project.github && (
@@ -243,9 +264,8 @@ function FeaturedCard({ project, visible }: { project: Project; visible: boolean
                     transition: "all 0.2s",
                   }}
                 >
-                  <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.164 6.839 9.49.5.09.682-.218.682-.484 0-.236-.009-.866-.013-1.7-2.782.605-3.369-1.343-3.369-1.343-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.16 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
-                  </svg>
+                  {/* استخدام الـ SVG الجديد والمضمون هنا بدلاً من لوكيد */}
+                  <GithubIcon size={14} />
                   Source
                 </a>
               )}
@@ -281,7 +301,6 @@ function ProjectCard({ project, visible, delay }: { project: Project; visible: b
         onMouseEnter={() => setHov(true)}
         onMouseLeave={() => setHov(false)}
       >
-        {/* Glow top */}
         <div style={{
           position: "absolute", top: 0, left: 0, right: 0, height: 1,
           background: `linear-gradient(90deg, transparent, rgba(${project.accent},${hov ? "0.8" : "0.3"}), transparent)`,
@@ -400,9 +419,9 @@ export default function Projects() {
           .featured-card-inner {
             grid-template-columns: 1fr !important;
           }
-          .featured-card-inner > div:first-child {
+          .featured-image-wrapper {
             aspect-ratio: 16/9;
-            max-height: 220px;
+            height: 220px !important;
           }
         }
         .section-label-pill {
@@ -490,9 +509,8 @@ export default function Projects() {
               e.currentTarget.style.background = "rgba(255,255,255,0.04)";
             }}
           >
-            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.164 6.839 9.49.5.09.682-.218.682-.484 0-.236-.009-.866-.013-1.7-2.782.605-3.369-1.343-3.369-1.343-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.16 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
-            </svg>
+            {/* استخدام الـ SVG الجديد والمضمون هنا في زر CTA السفلي */}
+            <GithubIcon size={18} />
             View All on GitHub
           </a>
         </div>

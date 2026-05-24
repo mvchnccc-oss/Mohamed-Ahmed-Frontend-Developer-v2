@@ -1,10 +1,33 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
+// استيراد أيقونات لوسيد المتوافقة مع المهارات والبار السفلي
+import { 
+  Atom, 
+  Triangle, 
+  Layers, 
+  Code2, 
+  Palette, 
+  GitBranch, 
+  Zap, 
+  Search, 
+  Coffee, 
+  Leaf, 
+  Link2, 
+  RefreshCw, 
+  Compass, 
+  Workflow, 
+  Terminal,
+  Cpu,
+  Gauge,
+  Eye,
+  Smartphone,
+  LucideIcon
+} from "lucide-react";
 
 /* ─── Types ──────────────────────────────────────────────── */
 interface Skill {
   label: string;
-  icon: string;
+  icon: LucideIcon; // تغيير النوع لاستقبال الـ Component الخاص بلوسيد مباشرة
   color: string;
   category: string;
   level: number;
@@ -12,21 +35,21 @@ interface Skill {
 
 /* ─── Data ───────────────────────────────────────────────── */
 const SKILLS: Skill[] = [
-  { label: "React.js",       icon: "⚛️",  color: "61,182,255",   category: "Frontend",  level: 95 },
-  { label: "Next.js",        icon: "▲",   color: "255,255,255",  category: "Frontend",  level: 93 },
-  { label: "TypeScript",     icon: "🔷",  color: "49,120,198",   category: "Language",  level: 88 },
-  { label: "JavaScript",     icon: "🟨",  color: "247,223,30",   category: "Language",  level: 92 },
-  { label: "Tailwind CSS",   icon: "🎨",  color: "56,189,248",   category: "Styling",   level: 95 },
-  { label: "Git & GitHub",   icon: "🐙",  color: "240,81,51",    category: "Tools",     level: 88 },
-  { label: "Vite",           icon: "⚡",  color: "189,52,254",   category: "Tools",     level: 85 },
-  { label: "SonarQube",      icon: "🔍",  color: "84,180,37",    category: "Tools",     level: 75 },
-  { label: "Java",           icon: "☕",  color: "244,128,36",   category: "Backend",   level: 70 },
-  { label: "Spring Boot",    icon: "🌱",  color: "109,179,63",   category: "Backend",   level: 68 },
-  { label: "REST APIs",      icon: "🔗",  color: "99,102,241",   category: "Backend",   level: 78 },
-  { label: "Agile / Scrum",  icon: "🔄",  color: "52,211,153",   category: "Methodology", level: 82 },
-  { label: "UML & ERD",      icon: "📐",  color: "251,146,60",   category: "Methodology", level: 80 },
-  { label: "SDLC",           icon: "🔁",  color: "167,139,250",  category: "Methodology", level: 80 },
-  { label: "LeetCode",       icon: "🧩",  color: "255,161,22",   category: "Problem Solving", level: 75 },
+  { label: "React.js",       icon: Atom,          color: "61,182,255",   category: "Frontend",  level: 95 },
+  { label: "Next.js",        icon: Triangle,      color: "255,255,255",  category: "Frontend",  level: 93 },
+  { label: "TypeScript",     icon: Layers,        color: "49,120,198",   category: "Language",  level: 88 },
+  { label: "JavaScript",     icon: Code2,         color: "247,223,30",   category: "Language",  level: 92 },
+  { label: "Tailwind CSS",   icon: Palette,       color: "56,189,248",   category: "Styling",   level: 95 },
+  { label: "Git & GitHub",   icon: GitBranch,     color: "240,81,51",    category: "Tools",     level: 88 },
+  { label: "Vite",           icon: Zap,           color: "189,52,254",   category: "Tools",     level: 85 },
+  { label: "SonarQube",      icon: Search,        color: "84,180,37",    category: "Tools",     level: 75 },
+  { label: "Java",           icon: Coffee,        color: "244,128,36",   category: "Backend",   level: 70 },
+  { label: "Spring Boot",    icon: Leaf,          color: "109,179,63",   category: "Backend",   level: 68 },
+  { label: "REST APIs",      icon: Link2,         color: "99,102,241",   category: "Backend",   level: 78 },
+  { label: "Agile / Scrum",  icon: RefreshCw,     color: "52,211,153",   category: "Methodology", level: 82 },
+  { label: "UML & ERD",      icon: Compass,       color: "251,146,60",   category: "Methodology", level: 80 },
+  { label: "SDLC",           icon: Workflow,      color: "167,139,250",  category: "Methodology", level: 80 },
+  { label: "LeetCode",       icon: Terminal,      color: "255,161,22",   category: "Problem Solving", level: 75 },
 ];
 
 const CATEGORIES = ["All", "Frontend", "Language", "Styling", "Tools", "Backend", "Methodology", "Problem Solving"];
@@ -51,6 +74,9 @@ function AnimatedNumber({ value, visible }: { value: number; visible: boolean })
 function SkillCard({ skill, visible, delay }: { skill: Skill; visible: boolean; delay: number }) {
   const [hovered, setHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  
+  // تفعيل أيقونة المهارة كـ Component
+  const IconComponent = skill.icon;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = cardRef.current;
@@ -104,17 +130,17 @@ function SkillCard({ skill, visible, delay }: { skill: Skill; visible: boolean; 
         }} />
       )}
 
-      {/* Icon */}
+      {/* Icon Container */}
       <div style={{
         width: 48, height: 48, borderRadius: 12,
         background: `rgba(${skill.color}, 0.12)`,
         border: `1px solid rgba(${skill.color}, 0.25)`,
         display: "flex", alignItems: "center", justifyContent: "center",
-        fontSize: "1.4rem", marginBottom: "0.9rem",
+        color: `rgb(${skill.color})`, marginBottom: "0.9rem",
         boxShadow: hovered ? `0 0 16px rgba(${skill.color}, 0.3)` : "none",
         transition: "box-shadow 0.3s",
       }}>
-        {skill.icon}
+        <IconComponent size={20} strokeWidth={2} />
       </div>
 
       {/* Label */}
@@ -183,6 +209,14 @@ export default function Skills() {
   const filtered = activeCategory === "All"
     ? SKILLS
     : SKILLS.filter((s) => s.category === activeCategory);
+
+  // مصفوفة البار السفلي المحدثة بأيقونات لوسيد
+  const highlightItems = [
+    { icon: Cpu, label: "Architecture", desc: "Component-driven design" },
+    { icon: Gauge, label: "Performance", desc: "Core Web Vitals focused" },
+    { icon: Eye, label: "Accessibility", desc: "WCAG compliant output" },
+    { icon: Smartphone, label: "Responsive", desc: "Mobile-first approach" },
+  ];
 
   return (
     <section id="skills" style={{ padding: "7rem 2rem", background: "#030310", color: "#e2e8f0" }}>
@@ -296,24 +330,24 @@ export default function Skills() {
           opacity: visible ? 1 : 0,
           transition: "all 0.6s ease 0.5s",
         }}>
-          {[
-            { icon: "🏗️", label: "Architecture", desc: "Component-driven design" },
-            { icon: "⚡", label: "Performance", desc: "Core Web Vitals focused" },
-            { icon: "♿", label: "Accessibility", desc: "WCAG compliant output" },
-            { icon: "📱", label: "Responsive", desc: "Mobile-first approach" },
-          ].map((item) => (
-            <div key={item.label} style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-              <span style={{ fontSize: "1.3rem" }}>{item.icon}</span>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: "0.85rem", color: "#c7d2fe", fontFamily: "'Space Grotesk', sans-serif" }}>
-                  {item.label}
-                </div>
-                <div style={{ fontSize: "0.75rem", color: "#475569", fontFamily: "'Space Grotesk', sans-serif" }}>
-                  {item.desc}
+          {highlightItems.map((item) => {
+            const BottomIcon = item.icon;
+            return (
+              <div key={item.label} style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                <span style={{ color: "#818cf8", display: "flex", alignItems: "center" }}>
+                  <BottomIcon size={20} />
+                </span>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: "0.85rem", color: "#c7d2fe", fontFamily: "'Space Grotesk', sans-serif" }}>
+                    {item.label}
+                  </div>
+                  <div style={{ fontSize: "0.75rem", color: "#475569", fontFamily: "'Space Grotesk', sans-serif" }}>
+                    {item.desc}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
       </div>

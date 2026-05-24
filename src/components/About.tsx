@@ -1,5 +1,16 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
+// استيراد أيقونات لوسيد الاحترافية
+import { 
+  MapPin, 
+  GraduationCap, 
+  Briefcase, 
+  Sparkles, 
+  Cpu, 
+  Terminal,
+  Layers,
+  History
+} from "lucide-react";
 
 /* ─── 3D Tilt Card ───────────────────────────────────────── */
 function TiltCard({
@@ -63,9 +74,10 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 /* ─── Timeline Entry ─────────────────────────────────────── */
 function TimelineEntry({
-  icon, title, subtitle, period, description, color, delay,
+  icon: IconComponent, title, subtitle, period, description, color, delay,
 }: {
-  icon: string; title: string; subtitle: string;
+  icon: React.ComponentType<{ size?: number; color?: string }>; 
+  title: string; subtitle: string;
   period: string; description: string; color: string; delay: number;
 }) {
   const [visible, setVisible] = useState(false);
@@ -87,16 +99,16 @@ function TimelineEntry({
         transition: `all 0.6s ease ${delay}ms`,
       }}
     >
-      {/* Icon */}
+      {/* Icon Container */}
       <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div style={{
           width: 48, height: 48, borderRadius: 12,
           background: `rgba(${color}, 0.12)`,
           border: `1px solid rgba(${color}, 0.3)`,
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: "1.3rem", flexShrink: 0,
+          color: `rgb(${color})`, flexShrink: 0,
         }}>
-          {icon}
+          <IconComponent size={20} />
         </div>
         <div style={{ width: 1, flex: 1, background: "rgba(255,255,255,0.06)", marginTop: 8 }} />
       </div>
@@ -217,10 +229,21 @@ export default function About() {
             <p style={{ color: "#64748b", lineHeight: 1.8, fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.9rem" }}>
               Whether it's architecting a full-stack e-commerce platform with <strong style={{ color: "#818cf8" }}>Next.js & Spring Boot</strong>, or pixel-perfecting a high-conversion landing page — I bring the same obsessive attention to detail to every project.
             </p>
+            
+            {/* Info Pills with Lucide Icons */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "1.5rem" }}>
-              {["📍 Cairo, Egypt", "🎓 Cairo University '28", "💼 Frontend Trainee", "⚡ Open to Offers"].map((pill) => (
-                <span key={pill} className="info-pill">{pill}</span>
-              ))}
+              <span className="info-pill">
+                <MapPin size={14} className="text-indigo-400" /> Cairo, Egypt
+              </span>
+              <span className="info-pill">
+                <GraduationCap size={14} className="text-indigo-400" /> Cairo University '28
+              </span>
+              <span className="info-pill">
+                <Briefcase size={14} className="text-indigo-400" /> Frontend Trainee
+              </span>
+              <span className="info-pill">
+                <Sparkles size={14} className="text-indigo-400" /> Open to Offers
+              </span>
             </div>
           </TiltCard>
 
@@ -240,7 +263,9 @@ export default function About() {
             </TiltCard>
             <TiltCard style={{ ...bentoCardStyle, flex: 1 }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                <span style={{ fontSize: "1.8rem" }}>🧩</span>
+                <span style={{ color: "#818cf8", display: "flex", alignItems: "center" }}>
+                  <Terminal size={24} />
+                </span>
                 <div>
                   <div style={{ color: "#c7d2fe", fontWeight: 700, fontSize: "0.9rem", fontFamily: "'Space Grotesk', sans-serif" }}>LeetCode Solver</div>
                   <div style={{ color: "#475569", fontSize: "0.78rem", fontFamily: "'Space Grotesk', sans-serif" }}>Algorithms & DSA practice</div>
@@ -251,9 +276,13 @@ export default function About() {
 
           {/* Timeline - Education & Experience */}
           <TiltCard className="bento-half" style={{ ...bentoCardStyle }}>
-            <SectionLabel>🎓 Education</SectionLabel>
+            <SectionLabel>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}>
+                <Layers size={14} /> Education
+              </span>
+            </SectionLabel>
             <TimelineEntry
-              icon="🏛️"
+              icon={GraduationCap}
               title="Cairo University"
               subtitle="Software Engineering"
               period="2024 – 2028"
@@ -264,9 +293,13 @@ export default function About() {
           </TiltCard>
 
           <TiltCard className="bento-half" style={{ ...bentoCardStyle }}>
-            <SectionLabel>💼 Experience</SectionLabel>
+            <SectionLabel>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}>
+                <History size={14} /> Experience
+              </span>
+            </SectionLabel>
             <TimelineEntry
-              icon="🚀"
+              icon={Cpu}
               title="Root Academy"
               subtitle="Frontend Trainee"
               period="07/2025 – 02/2026"

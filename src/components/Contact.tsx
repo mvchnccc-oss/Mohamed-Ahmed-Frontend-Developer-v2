@@ -1,4 +1,7 @@
+"use client";
 import { useState } from "react";
+// استيراد الأيقونات المحدثة بدلاً من الـ SVG
+import { Mail, Phone } from "lucide-react";
 
 type FormState = { name: string; email: string; message: string };
 type Status = "idle" | "sending" | "sent" | "error";
@@ -10,22 +13,12 @@ const contactItems = [
   {
     label: "Email",
     value: "mvchnccc@gmail.com",
-    icon: (
-      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-          strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
+    icon: <Mail size={22} strokeWidth={2} />,
   },
   {
     label: "Phone No.",
     value: "01129033610",
-    icon: (
-      <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372a1.125 1.125 0 00-.852-1.091l-4.423-1.106a1.125 1.125 0 00-1.173.417l-.97 1.293a12.035 12.035 0 01-7.143-7.143l1.293-.97a1.125 1.125 0 00.417-1.173L6.963 3.102A1.125 1.125 0 005.872 2.25H4.5A2.25 2.25 0 002.25 4.5v2.25z"
-          strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
+    icon: <Phone size={22} strokeWidth={1.5} />,
   },
   {
     label: "LinkedIn",
@@ -117,7 +110,7 @@ export default function Contact() {
           background: "var(--bg2)", padding: "2rem", borderRadius: 16,
           border: "1px solid var(--border)", boxShadow: "0 4px 30px rgba(0,0,0,.06)",
         }}>
-          <div className="contact-form-row" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.25rem" }}>
+          <div className="contact-form-row" style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1rem", marginBottom: "1.25rem" }}>
             <div>
               <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 600, color: "var(--ink)", marginBottom: "0.4rem" }}>Name</label>
               <input
