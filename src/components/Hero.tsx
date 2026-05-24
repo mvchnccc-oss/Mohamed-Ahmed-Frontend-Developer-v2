@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 // استيراد الأيقونات المضمونة من لوكيد لتوزيعها على المدارات المنفصلة
-import { Atom, Code2, Cpu, Terminal } from "lucide-react";
+import { Atom, Code2, Cpu, Download, Terminal } from "lucide-react";
 import MohamedAhmed from "../assets/Mohamed ahmed.png";
 
 export default function Hero() {
@@ -177,12 +177,12 @@ export default function Hero() {
             lineHeight: 1.7, maxWidth: "560px", marginBottom: "2.5rem",
             fontFamily: "'Space Grotesk', sans-serif"
           }}>
-            I am <span style={{ color: "#f1f5f9", fontWeight: 600 }}>Mohamed Ahmed Shehata</span>.
+            د            I am <span style={{ color: "#f1f5f9", fontWeight: 600 }}>Mohamed Ahmed Shehata</span>.
             A Software Engineer specialized in creating fast responsive frontends with <span style={{ color: "#818cf8" }}>Next.js & React</span>,
             backed by robust enterprise backend services using <span style={{ color: "#38bdf8" }}>Java Spring Boot</span>.
           </p>
-
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
+            {/* الزرار الأول: View My Work */}
             <a href="#projects" style={{
               display: "inline-flex", alignItems: "center", padding: "0.85rem 1.8rem",
               borderRadius: "999px", background: "linear-gradient(135deg, #6366f1, #4f46e5)",
@@ -195,6 +195,37 @@ export default function Hero() {
             >
               View My Work
             </a>
+
+            {/* الزرار الثاني: Download CV */}
+            <a
+              href="/Mohamed_Ahmed_CV.pdf"
+              download="Mohamed_Ahmed_CV.pdf"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.85rem 1.8rem",
+                borderRadius: "999px", background: "rgba(56, 189, 248, 0.04)",
+                border: "1px solid rgba(56, 189, 248, 0.2)", color: "#38bdf8",
+                fontWeight: 700, fontSize: "0.9rem", textDecoration: "none",
+                fontFamily: "'Space Grotesk', sans-serif", transition: "all 0.2s",
+                boxShadow: "0 4px 15px rgba(56, 189, 248, 0.05)"
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(56, 189, 248, 0.1)";
+                e.currentTarget.style.borderColor = "rgba(56, 189, 248, 0.5)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow = "0 4px 20px rgba(56, 189, 248, 0.2)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(56, 189, 248, 0.04)";
+                e.currentTarget.style.borderColor = "rgba(56, 189, 248, 0.2)";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "0 4px 15px rgba(56, 189, 248, 0.05)";
+              }}
+            >
+              <Download size={16} />
+              Download CV
+            </a>
+
+            {/* الزرار الثالث: Contact Me */}
             <a href="#contact" style={{
               display: "inline-flex", alignItems: "center", padding: "0.85rem 1.8rem",
               borderRadius: "999px", background: "rgba(255,255,255,0.02)",

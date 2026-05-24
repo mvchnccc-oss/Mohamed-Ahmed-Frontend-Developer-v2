@@ -1,7 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
-// استيراد الأيقونات الحديثة لتطابق نمط التصميم
-import { Sun, Moon, Menu, X } from "lucide-react";
+
+import { useEffect, useState } from "react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 
 interface NavbarProps {
   dark?: boolean;
@@ -9,213 +9,413 @@ interface NavbarProps {
 }
 
 const NAV_LINKS = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
 ];
 
-export default function Navbar({ dark, toggleTheme }: NavbarProps) {
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar({
+  dark = true,
+  toggleTheme,
+}: NavbarProps) {
   const [active, setActive] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
+  // Scroll Effect
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Active Section Observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
         });
       },
-      { threshold: 0.4 }
+      {
+        threshold: 0.5,
+      }
     );
-    NAV_LINKS.forEach(({ href }) => {
-      const el = document.querySelector(href);
-      if (el) observer.observe(el);
+
+    NAV_LINKS.forEach((link) => {
+      const section = document.querySelector(link.href);
+
+      if (section) observer.observe(section);
     });
+
     return () => observer.disconnect();
   }, []);
 
   return (
     <>
       <style>{`
-        .navbar-dock {
+        *{
+          box-sizing:border-box;
+        }
+
+        .navbar {
           position: fixed;
-          top: 1.25rem;
-          left: 50%;
-          transform: translateX(-50%);
+          top: 0;
+          left: 0;
+          width: 100%;
           z-index: 999;
+          transition: all .35s ease;
+          padding: 1rem 0;
+        }
+
+        .navbar.scrolled {
+          padding: .7rem 0;
+        }
+
+        .navbar-container {
+          width: min(1200px, calc(100% - 32px));
+          margin: auto;
+
           display: flex;
           align-items: center;
-          gap: 0.25rem;
-          padding: 0.5rem 1rem;
-          border-radius: 999px;
-          background: rgba(10, 10, 20, 0.55);
+          justify-content: space-between;
+
+          padding: .9rem 1.2rem;
+
+          border-radius: 22px;
+
+          background: rgba(15, 23, 42, 0.55);
+
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(99, 102, 241, 0.25);
-          box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07);
-          transition: all 0.3s ease;
-          white-space: nowrap;
+
+          border: 1px solid rgba(255,255,255,.08);
+
+          box-shadow:
+            0 10px 40px rgba(0,0,0,.35),
+            inset 0 1px 0 rgba(255,255,255,.04);
         }
-        .navbar-dock.scrolled {
-          background: rgba(6, 6, 15, 0.8);
-          border-color: rgba(99, 102, 241, 0.4);
-          box-shadow: 0 8px 40px rgba(99,102,241,0.15), 0 0 0 1px rgba(99,102,241,0.1);
+
+        .navbar.scrolled .navbar-container {
+          background: rgba(2, 6, 23, 0.72);
+          border-color: rgba(99,102,241,.22);
         }
-        .nav-logo {
-          font-size: 1.1rem;
+
+        /* Logo */
+
+        .logo {
+          font-size: 1.2rem;
           font-weight: 800;
-          background: linear-gradient(135deg, #818cf8, #38bdf8);
+          letter-spacing: -.04em;
+
+          background: linear-gradient(
+            135deg,
+            #818cf8,
+            #38bdf8
+          );
+
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          background-clip: text;
-          margin-right: 0.5rem;
-          font-family: 'Space Grotesk', 'Syne', sans-serif;
-          letter-spacing: -0.03em;
+
           cursor: pointer;
+          user-select: none;
+          flex-shrink: 0;
         }
-        .nav-divider {
-          width: 1px;
-          height: 20px;
-          background: rgba(255,255,255,0.1);
-          margin: 0 0.5rem;
-        }
-        .nav-link {
-          position: relative;
-          padding: 0.4rem 0.85rem;
-          border-radius: 999px;
-          font-size: 0.85rem;
-          font-weight: 500;
-          color: rgba(200,210,230,0.7);
-          cursor: pointer;
-          transition: all 0.2s ease;
-          text-decoration: none;
-          font-family: 'Space Grotesk', sans-serif;
-          letter-spacing: 0.01em;
-          border: none;
-          background: transparent;
-        }
-        .nav-link:hover {
-          color: #e2e8f0;
-          background: rgba(255,255,255,0.06);
-        }
-        .nav-link.active {
-          color: #fff;
-          background: rgba(99, 102, 241, 0.25);
-          box-shadow: 0 0 12px rgba(99,102,241,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
-        }
-        .nav-link.active::before {
-          content: '';
+
+        /* Desktop Nav */
+
+        .desktop-nav {
+          display: flex;
+          align-items: center;
+          gap: .35rem;
+
           position: absolute;
-          bottom: 6px;
           left: 50%;
           transform: translateX(-50%);
-          width: 4px;
-          height: 4px;
-          border-radius: 50%;
-          background: #818cf8;
-          box-shadow: 0 0 6px #818cf8;
         }
-        .nav-theme-btn {
-          width: 32px;
-          height: 32px;
+
+        .nav-link {
+          position: relative;
+
+          padding: .7rem 1rem;
+
+          border-radius: 999px;
+
+          color: rgba(226,232,240,.75);
+
+          text-decoration: none;
+
+          font-size: .92rem;
+          font-weight: 500;
+
+          transition: .25s ease;
+        }
+
+        .nav-link:hover {
+          color: white;
+          background: rgba(255,255,255,.05);
+        }
+
+        .nav-link.active {
+          color: white;
+
+          background:
+            linear-gradient(
+              135deg,
+              rgba(99,102,241,.22),
+              rgba(56,189,248,.18)
+            );
+
+          border: 1px solid rgba(129,140,248,.22);
+
+          box-shadow:
+            0 0 20px rgba(99,102,241,.18);
+        }
+
+        .nav-link.active::after {
+          content: "";
+
+          position: absolute;
+          bottom: 8px;
+          left: 50%;
+
+          transform: translateX(-50%);
+
+          width: 5px;
+          height: 5px;
+
           border-radius: 50%;
-          border: 1px solid rgba(255,255,255,0.1);
-          background: rgba(255,255,255,0.05);
-          color: #94a3b8;
-          cursor: pointer;
+
+          background: #818cf8;
+
+          box-shadow: 0 0 12px #818cf8;
+        }
+
+        /* Actions */
+
+        .actions {
+          display: flex;
+          align-items: center;
+          gap: .65rem;
+        }
+
+        .theme-btn,
+        .menu-btn {
+          width: 42px;
+          height: 42px;
+
+          border-radius: 50%;
+
+          border: 1px solid rgba(255,255,255,.08);
+
+          background: rgba(255,255,255,.04);
+
+          color: #cbd5e1;
+
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.2s;
-          margin-left: 0.25rem;
-          flex-shrink: 0;
+
+          cursor: pointer;
+
+          transition: .25s ease;
         }
-        .nav-theme-btn:hover {
-          background: rgba(99,102,241,0.2);
-          color: #818cf8;
-          border-color: rgba(99,102,241,0.4);
+
+        .theme-btn:hover,
+        .menu-btn:hover {
+          transform: translateY(-2px);
+
+          color: white;
+
+          background: rgba(99,102,241,.15);
+
+          border-color: rgba(129,140,248,.28);
+
+          box-shadow:
+            0 8px 25px rgba(99,102,241,.18);
         }
-        .nav-hamburger {
+
+        .menu-btn {
           display: none;
         }
+
+        /* Mobile Menu */
+
         .mobile-menu {
-          display: none;
           position: fixed;
-          top: 5rem;
+
+          top: 88px;
           left: 50%;
-          transform: translateX(-50%);
-          z-index: 998;
-          background: rgba(6, 6, 15, 0.92);
-          backdrop-filter: blur(20px);
-          border: 1px solid rgba(99, 102, 241, 0.25);
-          border-radius: 1rem;
+
+          transform:
+            translateX(-50%)
+            translateY(-10px);
+
+          width: min(92%, 420px);
+
+          opacity: 0;
+          visibility: hidden;
+
+          transition: .3s ease;
+
+          background: rgba(2, 6, 23, 0.94);
+
+          backdrop-filter: blur(22px);
+
+          border: 1px solid rgba(255,255,255,.08);
+
+          border-radius: 24px;
+
           padding: 1rem;
+
+          z-index: 998;
+
+          box-shadow:
+            0 20px 60px rgba(0,0,0,.5);
+        }
+
+        .mobile-menu.open {
+          opacity: 1;
+          visibility: visible;
+
+          transform:
+            translateX(-50%)
+            translateY(0);
+        }
+
+        .mobile-links {
+          display: flex;
           flex-direction: column;
-          gap: 0.25rem;
-          min-width: 200px;
-          box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+          gap: .4rem;
         }
-        .mobile-menu.open { display: flex; }
-        .mobile-menu .nav-link { width: 100%; text-align: center; padding: 0.6rem 1rem; }
-        @media (max-width: 640px) {
-          .navbar-dock .desktop-links { display: none; }
-          .navbar-dock .nav-divider { display: none; }
-          .nav-hamburger { display: flex !important; }
+
+        .mobile-links .nav-link {
+          width: 100%;
+          text-align: center;
+          padding: .95rem 1rem;
         }
+
+        /* Responsive */
+
+        @media (max-width: 900px) {
+
+          .desktop-nav {
+            display: none;
+          }
+
+          .menu-btn {
+            display: flex;
+          }
+
+          .navbar-container {
+            padding: .9rem 1rem;
+          }
+        }
+
       `}</style>
 
-      <nav className={`navbar-dock${scrolled ? " scrolled" : ""}`}>
-        <span className="nav-logo" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-          MA.
-        </span>
-        <div className="nav-divider" />
-        <div className="desktop-links" style={{ display: "flex", gap: "0.1rem" }}>
-          {NAV_LINKS.map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
-              className={`nav-link${active === href.slice(1) ? " active" : ""}`}
-              onClick={() => setActive(href.slice(1))}
+      {/* NAVBAR */}
+      <header className={`navbar ${scrolled ? "scrolled" : ""}`}>
+        <div className="navbar-container">
+
+          {/* Logo */}
+          <div
+            className="logo"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              })
+            }
+          >
+            MA.
+          </div>
+
+          {/* Desktop Nav */}
+          <nav className="desktop-nav">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className={`nav-link ${
+                  active === link.href.slice(1)
+                    ? "active"
+                    : ""
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Actions */}
+          <div className="actions">
+
+            {toggleTheme && (
+              <button
+                className="theme-btn"
+                onClick={toggleTheme}
+                aria-label="Toggle Theme"
+              >
+                {dark ? (
+                  <Sun size={18} />
+                ) : (
+                  <Moon size={18} />
+                )}
+              </button>
+            )}
+
+            <button
+              className="menu-btn"
+              onClick={() =>
+                setMenuOpen(!menuOpen)
+              }
+              aria-label="Menu"
             >
-              {label}
+              {menuOpen ? (
+                <X size={20} />
+              ) : (
+                <Menu size={20} />
+              )}
+            </button>
+
+          </div>
+        </div>
+      </header>
+
+      {/* MOBILE MENU */}
+      <div
+        className={`mobile-menu ${
+          menuOpen ? "open" : ""
+        }`}
+      >
+        <div className="mobile-links">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={`nav-link ${
+                active === link.href.slice(1)
+                  ? "active"
+                  : ""
+              }`}
+              onClick={() => {
+                setMenuOpen(false);
+                setActive(link.href.slice(1));
+              }}
+            >
+              {link.label}
             </a>
           ))}
         </div>
-        {toggleTheme && (
-          <button className="nav-theme-btn" onClick={toggleTheme} aria-label="Toggle theme">
-            {dark ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
-          </button>
-        )}
-        <button
-          className="nav-hamburger"
-          style={{ width: 32, height: 32, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.05)", borderRadius: 8, color: "#94a3b8", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "0.25rem" }}
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label="Menu"
-        >
-          {menuOpen ? <X size={16} strokeWidth={2} /> : <Menu size={16} strokeWidth={2} />}
-        </button>
-      </nav>
-
-      <div className={`mobile-menu${menuOpen ? " open" : ""}`}>
-        {NAV_LINKS.map(({ href, label }) => (
-          <a
-            key={href}
-            href={href}
-            className={`nav-link${active === href.slice(1) ? " active" : ""}`}
-            onClick={() => { setActive(href.slice(1)); setMenuOpen(false); }}
-          >
-            {label}
-          </a>
-        ))}
       </div>
     </>
   );
