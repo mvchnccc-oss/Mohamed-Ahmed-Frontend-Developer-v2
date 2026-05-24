@@ -2,7 +2,8 @@
 import { useState, useEffect } from "react";
 // استيراد الأيقونات المضمونة من لوكيد لتوزيعها على المدارات المنفصلة
 import { Atom, Code2, Cpu, Terminal } from "lucide-react";
-import MohamedAhmed from "../assets/Mohamed ahmed.png"
+import MohamedAhmed from "../assets/Mohamed ahmed.png";
+
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
 
@@ -64,7 +65,7 @@ export default function Hero() {
           width: 450px;
           height: 450px;
           display: flex;
-          justifyContent: center;
+          justify-content: center;
           align-items: center;
           perspective: 1200px;
         }
@@ -110,7 +111,7 @@ export default function Hero() {
           position: absolute;
           top: 50%;
           left: 50%;
-          width: 48px; /* تكبير بسيط جداً لراحة العين */
+          width: 48px;
           height: 48px;
           margin: -24px;
         }
@@ -142,9 +143,9 @@ export default function Hero() {
         pointerEvents: "none"
       }} />
 
-      // ابحث عن الحاوية دي وعدلها بالشكل ده:
+      {/* تم تنظيف الحاوية وصياغة التايبس كـ Strings صريحة لمنع اعتراض الـ Compiler */}
       <div className="hero-container" style={{
-        opacity: mounted ? "1" : "0", // تحويلها إلى string
+        opacity: mounted ? "1" : "0",
         transform: mounted ? "translateY(0)" : "translateY(30px)",
         transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
       }}>
@@ -181,7 +182,7 @@ export default function Hero() {
             backed by robust enterprise backend services using <span style={{ color: "#38bdf8" }}>Java Spring Boot</span>.
           </p>
 
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "inherit" }}>
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
             <a href="#projects" style={{
               display: "inline-flex", alignItems: "center", padding: "0.85rem 1.8rem",
               borderRadius: "999px", background: "linear-gradient(135deg, #6366f1, #4f46e5)",
@@ -215,20 +216,19 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* الجانب الأيمن: الكون المداري مع إضافة النيون شادوز وإجبار الأبعاد الهندسية المربعة */}
+        {/* الجانب الأيمن: الكون المداري */}
         <div className="right-side-universe" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <div className="universe-stage">
 
             {/* 1. المدار الداخلي (يحمل أيقونة React) */}
             <div className="orbit-inner">
-              <div className="satellite-node" style={{ transform: `translate(120px)` }}>
+              <div className="satellite-node" style={{ transform: "translate(120px)" }}>
                 <div style={{
                   width: "100%", height: "100%", borderRadius: "12px",
                   background: "rgba(6, 6, 16, 0.95)", border: "1px solid rgba(56, 189, 248, 0.4)",
                   color: "#61DAFB", display: "flex", alignItems: "center", justifyContent: "center",
-                  aspectRatio: "1/1", // حماية الـ Aspect Ratio من الانضغاط الرأسي
+                  aspectRatio: "1/1",
                   animation: "keep-upright-1 14s linear infinite",
-                  // إضافة التوهج النيون بلون الـ React
                   boxShadow: "0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(97, 218, 251, 0.35)",
                   filter: "drop-shadow(0 0 8px rgba(97, 218, 251, 0.2))"
                 }}>
@@ -237,16 +237,15 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* 2. المدار الأوسط (يحمل أيقونة ترمز لـ Next.js / Frontend) */}
+            {/* 2. المدار الأوسط */}
             <div className="orbit-mid">
-              <div className="satellite-node" style={{ transform: `translate(-170px)` }}>
+              <div className="satellite-node" style={{ transform: "translate(-170px)" }}>
                 <div style={{
                   width: "100%", height: "100%", borderRadius: "12px",
                   background: "rgba(6, 6, 16, 0.95)", border: "1px solid rgba(255, 255, 255, 0.25)",
                   color: "#ffffff", display: "flex", alignItems: "center", justifyContent: "center",
                   aspectRatio: "1/1",
                   animation: "keep-upright-2 18s linear infinite",
-                  // إضافة توهج أبيض ثلجي رائع لـ Next.js
                   boxShadow: "0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 255, 255, 0.2)",
                   filter: "drop-shadow(0 0 8px rgba(255, 255, 255, 0.15))"
                 }}>
@@ -255,14 +254,13 @@ export default function Hero() {
               </div>
 
               {/* أيقونة ثانية في نفس المدار الأوسط (TypeScript) */}
-              <div className="satellite-node" style={{ transform: `translate(170px)` }}>
+              <div className="satellite-node" style={{ transform: "translate(170px)" }}>
                 <div style={{
                   width: "100%", height: "100%", borderRadius: "12px",
                   background: "rgba(6, 6, 16, 0.95)", border: "1px solid rgba(49, 120, 198, 0.4)",
                   color: "#3178C6", display: "flex", alignItems: "center", justifyContent: "center",
                   aspectRatio: "1/1",
                   animation: "keep-upright-2 18s linear infinite",
-                  // توهج أزرق داكن لـ TypeScript
                   boxShadow: "0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(49, 120, 198, 0.35)",
                   filter: "drop-shadow(0 0 8px rgba(49, 120, 198, 0.2))"
                 }}>
@@ -271,16 +269,15 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* 3. المدار الخارجي (يحمل أيقونة ترمز للـ Java / Backend) */}
+            {/* 3. المدار الخارجي (Java) */}
             <div className="orbit-outer">
-              <div className="satellite-node" style={{ transform: `translate(220px)` }}>
+              <div className="satellite-node" style={{ transform: "translate(220px)" }}>
                 <div style={{
                   width: "100%", height: "100%", borderRadius: "12px",
                   background: "rgba(6, 6, 16, 0.95)", border: "1px solid rgba(231, 111, 81, 0.4)",
                   color: "#E76F51", display: "flex", alignItems: "center", justifyContent: "center",
                   aspectRatio: "1/1",
                   animation: "keep-upright-1 25s linear infinite",
-                  // توهج برتقالي ناري دافئ لـ Java
                   boxShadow: "0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(231, 111, 81, 0.35)",
                   filter: "drop-shadow(0 0 8px rgba(231, 111, 81, 0.2))"
                 }}>
@@ -289,7 +286,7 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* صورة البروفايل المركزية */}
+            {/* صورة البروفايل المركزية مصلحة ومضمونة بدون استدعاء .src الخاطئ في Vite */}
             <div style={{
               position: "relative", width: "190px", height: "190px",
               borderRadius: "50%", padding: "6px", zIndex: 10,
@@ -302,7 +299,7 @@ export default function Hero() {
                 overflow: "hidden", background: "#060612", position: "relative"
               }}>
                 <img
-                  src={MohamedAhmed}
+                  src={MohamedAhmed} // تم التميرير مباشرة كـ string ليتوافق مع أصول الـ Build في Vite
                   alt="Mohamed Ahmed"
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
