@@ -21,6 +21,11 @@ import {
   Gauge,
   Eye,
   Smartphone,
+  MessageCircle,
+  Clock4,
+  BookOpen,
+  Users,
+  Globe2,
   LucideIcon
 } from "lucide-react";
 
@@ -50,9 +55,15 @@ const SKILLS: Skill[] = [
   { label: "UML & ERD",      icon: Compass,       color: "251,146,60",   category: "Methodology", level: 80 },
   { label: "SDLC",           icon: Workflow,      color: "167,139,250",  category: "Methodology", level: 80 },
   { label: "LeetCode",       icon: Terminal,      color: "255,161,22",   category: "Problem Solving", level: 75 },
+  { label: "Communication Skills", icon: MessageCircle, color: "56,189,248", category: "Soft Skills", level: 90 },
+  { label: "Time Management", icon: Clock4, color: "245,158,11", category: "Soft Skills", level: 88 },
+  { label: "Attention to Detail", icon: Eye, color: "34,197,94", category: "Soft Skills", level: 92 },
+  { label: "Self-Learning", icon: BookOpen, color: "168,85,247", category: "Soft Skills", level: 90 },
+  { label: "Leadership", icon: Users, color: "249,115,22", category: "Soft Skills", level: 87 },
+  { label: "English", icon: Globe2, color: "96,165,250", category: "Soft Skills", level: 82 },
 ];
 
-const CATEGORIES = ["All", "Frontend", "Language", "Styling", "Tools", "Backend", "Methodology", "Problem Solving"];
+const CATEGORIES = ["All", "Frontend", "Language", "Styling", "Tools", "Backend", "Methodology", "Problem Solving", "Soft Skills"];
 
 /* ─── Animated Number ────────────────────────────────────── */
 function AnimatedNumber({ value, visible }: { value: number; visible: boolean }) {
