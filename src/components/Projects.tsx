@@ -5,6 +5,9 @@ import { ExternalLink } from "lucide-react";
 import ShopSphere from "../assets/ShopSphereHome.png";
 import LandingPage from "../assets/LandingPage.png";
 import ShopMart from "../assets/E-commerce.png";
+import Ecolyro from "../assets/Ecolyro.png";
+import Divenore from "../assets/Divenore.png";
+import Nexora from "../assets/Nexsora.png";
 
 /* ─── Types ──────────────────────────────────────────────── */
 interface Project {
@@ -35,6 +38,36 @@ const PROJECTS: Project[] = [
     roles: ["Customer Portal", "Seller Dashboard", "Admin Panel"],
   },
   {
+    title: "Ecolyro",
+    tagline: "Dark Premium Design System",
+    desc: "Landing page and design system for an ecosystem services company spanning AI integration, data engineering, e-commerce, and wellness. Built with a linear.app-inspired dark premium aesthetic, featuring a detailed services layout, a six-step process timeline, and a responsive split-panel industries section.",
+    img: Ecolyro,
+    tags: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    live: "https://www.ecolyro.com",
+    accent: "129,140,248",
+    featured: false,
+  },
+  {
+    title: "Divenore",
+    tagline: "Wellness & Personal Development Platform",
+    desc: "Landing page for a wellness and personal development brand, built to match an existing design system with polished hero, story, and call-to-action sections crafted for a calm, premium feel.",
+    img: Divenore,
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "shadcn/ui"],
+    live: "https://www.divenore.com",
+    accent: "45,212,191",
+    featured: false,
+  },
+  {
+    title: "Nexora Academy",
+    tagline: "Online Education Landing Page",
+    desc: "Landing page for an Egyptian online education platform, featuring a redesigned global call-to-action section and a fully integrated contact page with Egyptian phone number validation and Google Forms submission.",
+    img: Nexora,
+    tags: ["React", "TypeScript", "Tailwind CSS", "Google Forms"],
+    live: "https://nexoraacademy.online",
+    accent: "251,191,36",
+    featured: false,
+  },
+  {
     title: "SaaS Landing Page",
     tagline: "High-Conversion Company Portfolio",
     desc: "Performance-focused landing page designed for maximum conversion. Built with modern React patterns, optimized for Core Web Vitals, and crafted with meticulous attention to UX details, responsive layouts, and smooth micro-interactions.",
@@ -61,7 +94,7 @@ const PROJECTS: Project[] = [
 function GithubIcon({ size = 16 }: { size?: number }) {
   return (
     <svg width={size} height={size} fill="currentColor" viewBox="0 0 24 24" style={{ display: "inline-block", verticalAlign: "middle" }}>
-      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
     </svg>
   );
 }
@@ -264,7 +297,6 @@ function FeaturedCard({ project, visible }: { project: Project; visible: boolean
                     transition: "all 0.2s",
                   }}
                 >
-                  {/* استخدام الـ SVG الجديد والمضمون هنا بدلاً من لوكيد */}
                   <GithubIcon size={14} />
                   Source
                 </a>
@@ -286,6 +318,7 @@ function ProjectCard({ project, visible, delay }: { project: Project; visible: b
       opacity: visible ? 1 : 0,
       transform: visible ? "translateY(0)" : "translateY(30px)",
       transition: `all 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+      height: "100%", // التأكد من تمدد الحاوية الخارجية الـ Tilt
     }}>
       <div
         style={{
@@ -295,6 +328,8 @@ function ProjectCard({ project, visible, delay }: { project: Project; visible: b
           borderRadius: 18,
           overflow: "hidden",
           height: "100%",
+          display: "flex",        // تم إضافة flexbox هنا للتمدد طوليًا
+          flexDirection: "column", // لتوزيع المحتوى رأسيًا (الصورة ثم النصوص)
           transition: "background 0.3s, border-color 0.3s, box-shadow 0.3s",
           boxShadow: hov ? `0 0 40px rgba(${project.accent}, 0.12), 0 20px 50px rgba(0,0,0,0.3)` : "0 4px 30px rgba(0,0,0,0.3)",
         }}
@@ -308,7 +343,7 @@ function ProjectCard({ project, visible, delay }: { project: Project; visible: b
         }} />
 
         {/* Image */}
-        <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden" }}>
+        <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", flexShrink: 0 }}>
           <img
             src={project.img}
             alt={project.title}
@@ -331,46 +366,55 @@ function ProjectCard({ project, visible, delay }: { project: Project; visible: b
         </div>
 
         {/* Body */}
-        <div style={{ padding: "1.5rem" }}>
-          <div style={{
-            fontSize: "0.7rem", color: `rgba(${project.accent}, 0.8)`,
-            fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.1em",
-            textTransform: "uppercase", fontWeight: 600, marginBottom: "0.5rem",
-          }}>
-            {project.tagline}
-          </div>
-          <h3 style={{
-            fontSize: "1.2rem", fontWeight: 800, color: "#f1f5f9",
-            fontFamily: "'Syne', sans-serif", letterSpacing: "-0.03em",
-            marginBottom: "0.75rem",
-          }}>
-            {project.title}
-          </h3>
-          <p style={{
-            color: "#64748b", fontSize: "0.85rem", lineHeight: 1.7,
-            fontFamily: "'Space Grotesk', sans-serif", marginBottom: "1.25rem",
-          }}>
-            {project.desc}
-          </p>
+        {/* تم تعديل الـ padding والـ flex لتوزيع العناصر ودفع الأزرار للقاع */}
+        <div style={{ 
+          padding: "1.5rem", 
+          display: "flex", 
+          flexDirection: "column", 
+          justifyContent: "space-between", 
+          flex: 1 
+        }}>
+          <div>
+            <div style={{
+              fontSize: "0.7rem", color: `rgba(${project.accent}, 0.8)`,
+              fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.1em",
+              textTransform: "uppercase", fontWeight: 600, marginBottom: "0.5rem",
+            }}>
+              {project.tagline}
+            </div>
+            <h3 style={{
+              fontSize: "1.2rem", fontWeight: 800, color: "#f1f5f9",
+              fontFamily: "'Syne', sans-serif", letterSpacing: "-0.03em",
+              marginBottom: "0.75rem",
+            }}>
+              {project.title}
+            </h3>
+            <p style={{
+              color: "#64748b", fontSize: "0.85rem", lineHeight: 1.7,
+              fontFamily: "'Space Grotesk', sans-serif", marginBottom: "1.25rem",
+            }}>
+              {project.desc}
+            </p>
 
-          {/* Tags */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.25rem" }}>
-            {project.tags.map((t) => (
-              <span key={t} style={{
-                padding: "0.15rem 0.6rem", borderRadius: 999,
-                background: `rgba(${project.accent}, 0.08)`,
-                border: `1px solid rgba(${project.accent}, 0.2)`,
-                color: `rgba(${project.accent}, 0.85)`,
-                fontSize: "0.7rem", fontWeight: 600,
-                fontFamily: "'Space Grotesk', sans-serif",
-              }}>
-                {t}
-              </span>
-            ))}
+            {/* Tags */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.25rem" }}>
+              {project.tags.map((t) => (
+                <span key={t} style={{
+                  padding: "0.15rem 0.6rem", borderRadius: 999,
+                  background: `rgba(${project.accent}, 0.08)`,
+                  border: `1px solid rgba(${project.accent}, 0.2)`,
+                  color: `rgba(${project.accent}, 0.85)`,
+                  fontSize: "0.7rem", fontWeight: 600,
+                  fontFamily: "'Space Grotesk', sans-serif",
+                }}>
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
 
           {/* Links */}
-          <div style={{ display: "flex", gap: "0.75rem" }}>
+          <div style={{ display: "flex", gap: "0.75rem", marginTop: "auto" }}>
             <a
               href={project.live}
               target="_blank"
@@ -509,7 +553,6 @@ export default function Projects() {
               e.currentTarget.style.background = "rgba(255,255,255,0.04)";
             }}
           >
-            {/* استخدام الـ SVG الجديد والمضمون هنا في زر CTA السفلي */}
             <GithubIcon size={18} />
             View All on GitHub
           </a>
